@@ -1,13 +1,14 @@
 numpy==1.26.0
-pandas==1.5.3  
-scikit-learn==1.6.1  
-xgboost==2.1.4  
-imbalanced-learn==0.13.0  
-tensorflow==2.18.0  
-flask==3.0.0  
-joblib==1.4.2  
-streamlit==1.29.0  
-rich==13.9.4  
-typing-extensions==4.5.0  
+pandas==1.5.3
+scikit-learn==1.6.1
+xgboost==2.1.4
+imbalanced-learn==0.13.0
+tensorflow==2.18.0
+flask==3.0.0
+joblib==1.4.2
+streamlit==1.29.0
+rich==13.9.4
+typing-extensions==4.5.0
+
 
 
