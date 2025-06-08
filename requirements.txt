@@ -6,3 +6,4 @@ imbalanced-learn
 tensorflow
 flask
 joblib
+streamlit
