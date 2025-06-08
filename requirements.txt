@@ -3,7 +3,7 @@ pandas
 scikit-learn
 xgboost
 imbalanced-learn
-tensorflow
+tensorflow==2.14.1
 flask
 joblib
 streamlit
