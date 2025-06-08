@@ -2,13 +2,17 @@ import streamlit as st
 import numpy as np
 import joblib
 import json
+import tensorflow.keras.losses
 from tensorflow.keras.models import load_model
+
+# Define custom objects for loading models
+custom_objects = {"mse": tensorflow.keras.losses.MeanSquaredError()}
 
 # Load models and scalers
 fda_model = joblib.load("models/fda_classifier.pkl")
 with open("models/fda_optimal_threshold.json", "r") as f:
     fda_threshold = json.load(f)["optimal_threshold"]
-cms_model = load_model("models/cms_lstm_model.h5", compile=False)
+cms_model = load_model("models/cms_lstm_model.h5", compile=False, custom_objects=custom_objects)  # Include custom_objects
 scaler_X = joblib.load("models/scaler_X.save")
 scaler_y = joblib.load("models/scaler_y.save")
 
@@ -48,11 +52,18 @@ cms_input = st.text_area("Enter sequence (3 timesteps, 5 features each):", "[[20
 
 if st.button("Forecast Utilization (CMS)"):
     try:
-        sequence = np.array(eval(cms_input))
+        # Ensure safe input conversion
+        sequence = json.loads(cms_input)
+        sequence = np.array(sequence)
+        
+        # Scale features
         sequence_scaled = scaler_X.transform(sequence)
         sequence_scaled = sequence_scaled.reshape(1, *sequence_scaled.shape)
+
+        # Make prediction
         pred_scaled = cms_model.predict(sequence_scaled)[0][0]
         utilization = scaler_y.inverse_transform([[pred_scaled]])[0][0]
+
         st.success("Forecast Complete")
         st.metric("Predicted Utilization", f"{utilization:.0f}")
     except Exception as e:
