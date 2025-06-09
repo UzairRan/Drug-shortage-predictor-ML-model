@@ -45,9 +45,9 @@ CMS Medicare Part D Utilization Dataset → Provides historical drug usage and s
 
 1️⃣ Clone the Repository 
 
-git clone https://github.com/yourusername/Drug-shortage-predictor-ML-model.git
+Clone this Repo
 
-cd Drug-shortage-predictor-ML-model
+cd Folder(where you want to clone)
 
 2️⃣ Install Dependencies
 
